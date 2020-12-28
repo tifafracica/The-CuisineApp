@@ -1,0 +1,34 @@
+.bg-image {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.bg-image::before {
+  content: "";
+  background-image: url(asset-path('home_image1.png'));
+  background-size: cover;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.75;
+}
+
+.text-homepage {
+  position: relative;
+  color: #ffffff;
+  line-height: 0.9;
+  text-align: center;
+}
+
+.logo-div{
+  width: 11rem;
+  position: relative;
+  top: -290px;
+}
