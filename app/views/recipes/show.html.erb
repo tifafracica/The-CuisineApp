@@ -1,0 +1,22 @@
+<%= render '/navbar' %>
+<div class="container">
+
+  <div class="row mt-5">
+    <% @results.each do |item| %>
+      <h1><%= item[:title] %></h1>
+      <div class="image-div mt-3">
+        <%= image_tag(item[:image], :alt => item[:title], :class => "card-img-top") %>
+      </div>
+      <div class="">
+        <ul>
+          <% item[:ingredients].each do |ingredient| %>
+            <li> <%= ingredient %> </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="">
+       <p> <%= item[:steps] %> </p>
+      </div>
+    <% end %>
+  </div>
+</div>

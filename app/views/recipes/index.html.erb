@@ -17,7 +17,7 @@
           <p class="card-text">Minutes: <%= recipe[:duration] %> <br>
           Servings: <%= recipe[:servings] %>
           </p>
-          <%= link_to "See the recipe", recipes_path(recipe), :class => "btn btn-danger"%>
+          <%= link_to "See the recipe", recipe_path(recipe[:id]), :class => "btn btn-danger"%>
         </div>
       </div>
 
