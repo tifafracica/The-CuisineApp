@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
 
   def index
-    @search = ''
+    @search = params[:search]
     response = Recipe.new(@search)
     @results = response.endpoint
   end
