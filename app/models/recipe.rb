@@ -29,20 +29,21 @@ class Recipe
   end
 
   def recipe_endpoint
-    info_api = HTTParty.get("https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&addRecipeInformation=true&apiKey=#{$api_key}&query=")
-    recipe = info_api["results"].select{|x| x["id"] == @data }
+    info_api = HTTParty.get("https://api.spoonacular.com/recipes/#{@data}/information?fillIngredients=true&apiKey=#{$api_key}")
     selected_recipe_array = []
-    recipe.map {|item|
-      hash = {
-        title: item["title"],
-        image: item["image"],
-        duration: item["readyInMinutes"],
-        servings: item["servings"],
-        ingredients: item["extendedIngredients"].map{|rep| rep["original"]},
-        steps: item["analyzedInstructions"].map{|data_steps| data_steps["steps"]}[0].map{|x| x["step"]}.join(" ")
-      }
-      selected_recipe_array.push(hash)
+    hash = {
+      title: info_api["title"],
+      image: info_api["image"],
+      duration: info_api["readyInMinutes"],
+      servings: info_api["servings"],
+      ingredients: info_api["extendedIngredients"].blank? ? '' : info_api["extendedIngredients"].map{|rep| rep["original"]},
+      steps:  unless info_api["analyzedInstructions"].blank?
+                  info_api["analyzedInstructions"].map{|data_steps| data_steps["steps"]}[0].map{|x| x["step"]}.join(" ")
+              else
+                " "
+              end
     }
+    selected_recipe_array.push(hash)
     selected_recipe_array
   end
 

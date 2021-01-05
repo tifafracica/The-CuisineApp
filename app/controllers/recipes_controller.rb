@@ -7,10 +7,9 @@ class RecipesController < ApplicationController
   end
 
   def show
-    recipe_id = params[:id].to_i
-    find_the_recipe = Recipe.new(recipe_id)
+    recipe_id = params[:id]
+    find_the_recipe = Recipe.new(recipe_id.to_i)
     @results = find_the_recipe.recipe_endpoint
-
   end
 
 end
