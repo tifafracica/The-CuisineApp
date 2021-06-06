@@ -10,6 +10,7 @@ class RecipesController < ApplicationController
     recipe_id = params[:id]
     find_the_recipe = Recipe.new(recipe_id.to_i)
     @results = find_the_recipe.recipe_endpoint
+
   end
 
 end
