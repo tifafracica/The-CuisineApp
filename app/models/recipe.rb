@@ -1,5 +1,4 @@
 class Recipe
-  require_relative '../../.api_key.rb'
 
   def initialize(data)
     require 'httparty'
@@ -13,7 +12,7 @@ class Recipe
   end
 
   def endpoint
-    info_api = HTTParty.get("https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&number=15&apiKey=#{$api_key}&query=#{@data}")
+    info_api = HTTParty.get("https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&number=15&apiKey=#{ENV["API_KEY"]}&query=#{@data}")
     recipes_array = []
     info_api["results"].map{ |recipe|
       hash = {
@@ -29,7 +28,7 @@ class Recipe
   end
 
   def recipe_endpoint
-    info_api = HTTParty.get("https://api.spoonacular.com/recipes/#{@data}/information?fillIngredients=true&apiKey=#{$api_key}")
+    info_api = HTTParty.get("https://api.spoonacular.com/recipes/#{@data}/information?fillIngredients=true&apiKey=#{ENV["API_KEY"]}")
     selected_recipe_array = []
     hash = {
       title: info_api["title"],
